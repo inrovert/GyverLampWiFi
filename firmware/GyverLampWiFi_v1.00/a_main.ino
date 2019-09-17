@@ -387,11 +387,11 @@ void parsing() {
               }
               break;
             case 2:
-              str.toCharArray(ssid, 24);
+              str.toCharArray(ssid, 21);
               setSsid(str);
               break;
             case 3:
-              str.toCharArray(pass, 16);
+              str.toCharArray(pass, 19);
               setPass(str);
               break;
             case 4:
