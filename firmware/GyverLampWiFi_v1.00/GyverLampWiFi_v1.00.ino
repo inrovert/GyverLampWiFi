@@ -184,7 +184,7 @@ timerMinim alarmSoundTimer(4294967295);  // Таймер выключения з
 timerMinim fadeSoundTimer(4294967295);   // Таймер плавного включения / выключения звука
 timerMinim saveSettingsTimer(30000);     // Таймер отложенного сохранения настроек
 
-#define DEFAULT_NTP_SERVER "ru.pool.ntp.org" // NTP сервер по умолчанию "time.nist.gov"
+#define DEFAULT_NTP_SERVER "ua.pool.ntp.org" // NTP сервер по умолчанию "time.nist.gov"
 
 #define DEFAULT_AP_NAME "LampAP"         // Имя точки доступа по умолчанию 
 #define DEFAULT_AP_PASS "12341234"       // Пароль точки доступа по умолчанию
