@@ -55,8 +55,8 @@ void loadSettings() {
   //   53 - Будильник, время: воскресенье : минуты
   //  54-63   - имя точки доступа    - 10 байт
   //  64-79   - пароль точки доступа - 16 байт
-  //  80-103  - имя сети  WiFi       - 24 байта
-  //  104-119 - пароль сети  WiFi    - 16 байт
+  //  80-100  - имя сети  WiFi       - 21 байт
+  //  101-119 - пароль сети  WiFi    - 19 байт
   //  120-149 - имя NTP сервера      - 30 байт
   //  150 - 150+(Nэфф*3)   - скорость эффекта
   //  151 - 150+(Nэфф*3)+1 - специальный параметр эффекта
@@ -111,8 +111,8 @@ void loadSettings() {
     useSoftAP = getUseSoftAP();
     getSoftAPName().toCharArray(apName, 10);        //  54-63   - имя точки доступа    ( 9 байт макс) + 1 байт '\0'
     getSoftAPPass().toCharArray(apPass, 17);        //  64-79   - пароль точки доступа (16 байт макс) + 1 байт '\0'
-    getSsid().toCharArray(ssid, 25);                //  80-103  - имя сети  WiFi       (24 байта макс) + 1 байт '\0'
-    getPass().toCharArray(pass, 17);                //  104-119 - пароль сети  WiFi    (16 байт макс) + 1 байт '\0'
+    getSsid().toCharArray(ssid, 22);                //  80-100  - имя сети  WiFi       (21 байта макс) + 1 байт '\0'
+    getPass().toCharArray(pass, 20);                //  101-119 - пароль сети  WiFi    (19 байт макс) + 1 байт '\0'
     getNtpServer().toCharArray(ntpServerName, 31);  //  120-149 - имя NTP сервера      (30 байт макс) + 1 байт '\0'
 
     if (strlen(apName) == 0) strcpy(apName, DEFAULT_AP_NAME);
@@ -498,7 +498,7 @@ void setSoftAPPass(String SoftAPPass) {
 }
 
 String getSsid() {
-  return EEPROM_string_read(80, 24);
+  return EEPROM_string_read(80, 21);
 }
 
 void setSsid(String Ssid) {
@@ -509,12 +509,12 @@ void setSsid(String Ssid) {
 }
 
 String getPass() {
-  return EEPROM_string_read(104, 16);
+  return EEPROM_string_read(101, 19);
 }
 
 void setPass(String Pass) {
   if (Pass != getPass()) {
-    EEPROM_string_write(104, Pass);
+    EEPROM_string_write(101, Pass);
     eepromModified = true;
   }
 }
