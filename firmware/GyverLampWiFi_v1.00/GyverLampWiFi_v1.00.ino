@@ -206,7 +206,7 @@ IPAddress timeServerIP;
 uint16_t SYNC_TIME_PERIOD = 60;          // Период синхронизации в минутах
 byte packetBuffer[NTP_PACKET_SIZE];      // буфер для хранения входящих и исходящих пакетов NTP
 
-int8_t timeZoneOffset = 7;               // смещение часового пояса от UTC
+int8_t timeZoneOffset = 3;               // смещение часового пояса от UTC
 long ntp_t = 0;                          // Время, прошедшее с запроса данных с NTP-сервера (таймаут)
 byte ntp_cnt = 0;                        // Счетчик попыток получить данные от сервера
 bool init_time = false;                  // Флаг false - время не инициализировано; true - время инициализировано
