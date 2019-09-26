@@ -184,7 +184,7 @@ timerMinim alarmSoundTimer(4294967295);  // Таймер выключения з
 timerMinim fadeSoundTimer(4294967295);   // Таймер плавного включения / выключения звука
 timerMinim saveSettingsTimer(30000);     // Таймер отложенного сохранения настроек
 
-#define DEFAULT_NTP_SERVER "ua.pool.ntp.org" // NTP сервер по умолчанию "time.nist.gov"
+#define DEFAULT_NTP_SERVER "ru.pool.ntp.org" // NTP сервер по умолчанию "time.nist.gov"
 
 #define DEFAULT_AP_NAME "LampAP"         // Имя точки доступа по умолчанию 
 #define DEFAULT_AP_PASS "12341234"       // Пароль точки доступа по умолчанию
@@ -192,14 +192,14 @@ timerMinim saveSettingsTimer(30000);     // Таймер отложенного 
 #define NETWORK_PASS ""                  // Пароль для подключения к WiFi сети
 
                                          // к длине +1 байт на \0 - терминальный символ. Это буферы для загрузки имен/пароля из EEPROM. Значения задаются в defiine выше
-char apName[17] = "";                    // Имя сети в режиме точки доступа
-char apPass[9]  = "";                    // Пароль подключения к точке доступа
+char apName[11] = "";                    // Имя сети в режиме точки доступа
+char apPass[17]  = "";                    // Пароль подключения к точке доступа
 char ssid[22] = "";                      // SSID (имя) вашего роутера (конфигурируется подключением через точку доступа и сохранением в EEPROM)
 char pass[20] = "";                      // пароль роутера
 
 WiFiUDP udp;
 unsigned int localPort = 2390;           // local port to listen for UDP packets
-byte IP_STA[] = {192, 168, 0, 116};      // Статический адрес в локальной сети WiFi
+byte IP_STA[] = {0, 0, 0, 0};      // Статический адрес в локальной сети WiFi
 
 IPAddress timeServerIP;
 #define NTP_PACKET_SIZE 48               // NTP время в первых 48 байтах сообщения
@@ -231,7 +231,7 @@ byte fadeSoundStepCounter = 0;       // счетчик шагов изменен
 
 #include "GyverButton.h"
 GButton butt(PIN_BTN, LOW_PULL, NORM_OPEN); // Для сенсорной кнопки
-// GButton butt(PIN_BTN, HIGH_PULL, NORM_OPEN);  // Для обычной кнопки
+//GButton butt(PIN_BTN, HIGH_PULL, NORM_OPEN);  // Для обычной кнопки
 
 bool isButtonHold = false;           // Кнопка нажата и удерживается
 
@@ -345,8 +345,8 @@ void startWiFi() {
     Serial.print(ssid);
 
     if (IP_STA[0] + IP_STA[1] + IP_STA[2] + IP_STA[3] > 0) {
-      WiFi.config(IPAddress(IP_STA[0], IP_STA[1], IP_STA[2], IP_STA[3]),  // 192.168.0.116
-                  IPAddress(IP_STA[0], IP_STA[1], IP_STA[2], 1),          // 192.168.0.1
+      WiFi.config(IPAddress(IP_STA[0], IP_STA[1], IP_STA[2], IP_STA[3]),  // 192.168.1.116
+                  IPAddress(IP_STA[0], IP_STA[1], IP_STA[2], 1),          // 192.168.1.1
                   IPAddress(255, 255, 255, 0));
     }              
     WiFi.begin(ssid, pass);
@@ -369,6 +369,11 @@ void startWiFi() {
     
     if (!wifi_connected)
       Serial.println(F("Не удалось подключиться к сети WiFi."));
+      // Serial.println(F("getSsid"));
+      //Serial.print(getSsid());
+      //Serial.println(F("getPass"));
+      //Serial.print(getPass());
+      //Serial.println();
   }  
 }
 
